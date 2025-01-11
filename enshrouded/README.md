@@ -5,6 +5,22 @@
 Enshrouded dedicated server.
 
 **Homepage:** <https://enshrouded.com/>
+Create the following secreates in you chosen namespace or generate them with the following:
+```
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: enshrouded-secrets
+type: Opaque
+data:
+  ADMIN_PASSWORD: QWRtaW5YWFhYWFhY # Base64-encoded version of "AdminXXXXXXXX"
+  FRIEND_PASSWORD: RnJpZW5kWFhYWFhY # Base64-encoded version of "FriendXXXXXXXX"
+  GUEST_PASSWORD: R3Vlc3RYWFhYWFhY # Base64-encoded version of "GuestXXXXXXXX"
+
+
+kubectl apply -n {namespace} -f secrets.yaml
+```
 
 ```
 image:

@@ -3,28 +3,28 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: enshrouded
-  namespace: enshrouded
+  namespace: {{ .Values.namespace }}
   labels:
     app: enshrouded
 spec:
+  replicas: {{ .Values.statefulset.replicas }}
   selector:
     matchLabels:
       app: enshrouded
   serviceName: "enshrouded"
-  replicas: 1
   template:
     metadata:
       labels:
         app: enshrouded
     spec:
       securityContext:
-        runAsUser: 10000
-        runAsGroup: 10000
-        fsGroup: 10000
+        runAsUser: {{ .Values.statefulset.securityContext.runAsUser }}
+        runAsGroup: {{ .Values.statefulset.securityContext.runAsGroup }}
+        fsGroup: {{ .Values.statefulset.securityContext.fsGroup }}
       containers:
         - name: enshrouded
-          image: sknnr/enshrouded-dedicated-server:latest
-          imagePullPolicy: Always
+          image: "{{ .Values.statefulset.image.repository }}:{{ .Values.statefulset.image.tag }}"
+          imagePullPolicy: {{ .Values.statefulset.image.pullPolicy }}
           ports:
             - containerPort: 15637
               name: "query-port-udp"
@@ -37,11 +37,11 @@ spec:
               subPath: enshrouded_server.json
           resources:
             requests:
-              cpu: 500m
-              memory: 500Mi
+              cpu: {{ .Values.statefulset.resources.requests.cpu }}
+              memory: {{ .Values.statefulset.resources.requests.memory }}
             limits:
-              cpu: 4
-              memory: 6Gi
+              cpu: {{ .Values.statefulset.resources.limits.cpu }}
+              memory: {{ .Values.statefulset.resources.limits.memory }}
       volumes:
         - name: config-volume
           configMap:
@@ -49,7 +49,6 @@ spec:
         - name: enshrouded-data
           persistentVolumeClaim:
             claimName: enshrouded-data
-## If you manually create a persistent volume and volume claim, comment out the section below.
   volumeClaimTemplates:
   - metadata:
       name: enshrouded-data
@@ -57,4 +56,4 @@ spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 10Gi
+          storage: {{ .Values.statefulset.volumes.data.size }}
