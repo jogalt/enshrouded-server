@@ -113,11 +113,11 @@ ${STEAMCMD_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run $
 
 # Find pid for enshrouded_server.exe
 timeout=0
-while [ $timeout -lt 11 ]; do
+while [ $timeout -lt 20 ]; do
     if ps -e | grep "enshrouded_serv"; then
         enshrouded_pid=$(ps -e | grep "enshrouded_serv" | awk '{print $1}')
         break
-    elif [ $timeout -eq 10 ]; then
+    elif [ $timeout -eq 19 ]; then
         echo "$(timestamp) ERROR: Timed out waiting for enshrouded_server.exe to be running"
         exit 1
     fi
