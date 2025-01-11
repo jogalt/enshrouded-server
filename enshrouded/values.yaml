@@ -7,6 +7,7 @@ namespace:
     warn: privileged
 
 config:
+  serverPasswordExistingSecretName: ""
   server:
     name: "Enshrouded Server"
     saveDirectory: "./savegame"
@@ -17,7 +18,7 @@ config:
     # Add other default configurations here
 
 service:
-  type: cilium # Choose between 'cilium' or 'nginx'
+  type: nginx # Choose between 'cilium' or 'nginx'
   ports:
     - name: "query-port"
       port: 15637
