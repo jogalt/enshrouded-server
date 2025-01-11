@@ -48,6 +48,11 @@ spec:
       - name: "{{ .Chart.Name }}"
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: Always
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+              - SYS_PTRACE
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         env:
