@@ -70,7 +70,10 @@ spec:
         ports:
         - name: query-port
           containerPort: {{ .Values.config.queryPort | int }}
-          protocol: UDP
+          #protocol: UDP
+        - name: game-port
+          containerPort: {{ .Values.config.gamePort | int }}
+          #protocol: UDP
         volumeMounts:
         - name: data
           mountPath: /home/steam/enshrouded/savegame

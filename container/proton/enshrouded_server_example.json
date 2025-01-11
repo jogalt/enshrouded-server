@@ -1,5 +1,4 @@
-DEFAULT enshrouded_server.json / VERSION 0.7.4.0
-
+//DEFAULT enshrouded_server.json / VERSION 0.7.4.0
 {
         "name": "Enshrouded Server",
         "saveDirectory": "./savegame",
@@ -73,3 +72,4 @@ DEFAULT enshrouded_server.json / VERSION 0.7.4.0
                         "reservedSlots": 0
                 }
         ]
+}
