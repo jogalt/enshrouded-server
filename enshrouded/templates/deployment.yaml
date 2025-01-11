@@ -33,8 +33,8 @@ spec:
         command: ["sh", "-c"]
         args:
           - |
-            chown -R 10000:10000 /home/steam/enshrouded/savegame;
-            chown -R 10000:10000 /home/steam/enshrouded/enshrouded_server.json;
+            find /home/steam/enshrouded/savegame -path /home/steam/enshrouded/savegame/lost+found -prune -o -exec chown -R 10000:10000 {} +;
+            #chown -R 10000:10000 /home/steam/enshrouded/enshrouded_server.json;
         volumeMounts:
         - name: data
           mountPath: /home/steam/enshrouded/savegame
@@ -74,6 +74,8 @@ spec:
         - name: enshrouded-config
           mountPath: /home/steam/enshrouded/enshrouded_server.json
           subPath: enshrouded_server.json
+        - name: config-volume
+          mountPath: /tmp
         securityContext:
           allowPrivilegeEscalation: false
       volumes:
@@ -83,3 +85,5 @@ spec:
       - name: enshrouded-config
         configMap:
           name: enshrouded-config
+      - name: config-volume
+        emptyDir: {}
