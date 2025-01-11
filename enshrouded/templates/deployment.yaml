@@ -61,8 +61,10 @@ spec:
         - name: SERVER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: enshrouded-secrets
-              key: ADMIN_PASSWORD
+              name: {{ include "enshrouded.passwordSecretName" . }}
+              key: serverPassword
+        - name: GAME_PORT
+          value: {{ .Values.config.gamePort | squote }}
         - name: QUERY_PORT
           value: {{ .Values.config.queryPort | squote }}
         - name: SERVER_SLOTS
@@ -70,10 +72,10 @@ spec:
         ports:
         - name: query-port
           containerPort: {{ .Values.config.queryPort | int }}
-          #protocol: UDP
+          protocol: UDP
         - name: game-port
           containerPort: {{ .Values.config.gamePort | int }}
-          #protocol: UDP
+          protocol: UDP
         volumeMounts:
         - name: data
           mountPath: /home/steam/enshrouded/savegame
