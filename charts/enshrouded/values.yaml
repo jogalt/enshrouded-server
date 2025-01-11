@@ -1,5 +1,5 @@
 image:
-  repository: sknnr/enshrouded-dedicated-server
+  repository: jogalt/enshrouded-server
   tag: latest
 
 service:
@@ -9,14 +9,14 @@ service:
 
 resources:
   requests:
-    memory: 12G
+    memory: 4G
     cpu: 4.0
 
 volumes:
   dataPVC:
     # -- Size of the persistent volume
-    size: 50Gi
-  storageClassName: ""
+    size: 5Gi
+  storageClassName: "default"
 
 config:
   # -- Server name

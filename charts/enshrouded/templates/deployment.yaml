@@ -67,3 +67,6 @@ spec:
       - name: data
         persistentVolumeClaim:
           claimName: "{{ .Chart.Name }}-data"
+      - name: enshrouded-config
+        configMap:
+          name: enshrouded-config
