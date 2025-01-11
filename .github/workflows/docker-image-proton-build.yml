@@ -36,7 +36,7 @@ jobs:
       # Run and monitor the container
       - name: Run and monitor the server
         run: |
-           docker run -it --name enshrouded-server ${{ secrets.DOCKER_USERNAME }}/enshrouded-server:proton-nightly /bin/sh
+           docker run --name enshrouded-server ***/enshrouded-server:proton-nightly /bin/sh
 #          docker run -d --name enshrouded-server ${{ secrets.DOCKER_USERNAME }}/enshrouded-server:proton-nightly
 #          echo "Waiting for '[server] Saved' in logs..."
 #          timeout 600 bash -c "until docker logs enshrouded-server 2>&1 | grep -q '\[server\] Saved'; do sleep 5; done"
