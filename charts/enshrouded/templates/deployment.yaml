@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: "{{ .Chart.Name }}"
+  namespace: steam-servers
   labels:
     app: "{{ .Chart.Name }}"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -37,16 +38,14 @@ spec:
         - name: SERVER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ include "enshrouded-secrets.passwordSecretName" . }}
-              key: serverPassword
+              name: enshrouded-secrets
+              key: ADMIN_PASSWORD
         - name: GAME_PORT
           value: {{ .Values.config.gamePort | squote }}
         - name: QUERY_PORT
           value: {{ .Values.config.queryPort | squote }}
         - name: SERVER_SLOTS
           value: {{ .Values.config.serverSlots | squote }}
-        - name: EXTERNAL_CONFIG
-          value: {{ .Values.config.externalConfig | squote }}
         ports:
         - name: game-port
           containerPort: {{ .Values.config.gamePort | int }}
@@ -62,7 +61,6 @@ spec:
           subPath: enshrouded_server.json
         securityContext:
           allowPrivilegeEscalation: false
-          
       volumes:
       - name: data
         persistentVolumeClaim:

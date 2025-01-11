@@ -1,8 +1,8 @@
----
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: enshrouded-config
+  namespace: steam-servers
 data:
   enshrouded_server.json: |
     {
@@ -31,7 +31,7 @@ data:
         "plantGrowthSpeedFactor": 1,
         "resourceDropStackAmountFactor": 1,
         "factoryProductionSpeedFactor": 1,
-        "perkUpgradeRecyclingFactor": 0.500000,
+        "perkUpgradeRecyclingFactor": 0.5,
         "perkCostFactor": 1,
         "experienceCombatFactor": 1,
         "experienceMiningFactor": 1,
@@ -53,7 +53,7 @@ data:
       "userGroups": [
         {
           "name": "Admin",
-          "password": "$(ADMIN_PASSWORD)",
+          "password": "",
           "canKickBan": true,
           "canAccessInventories": true,
           "canEditBase": true,
@@ -62,7 +62,7 @@ data:
         },
         {
           "name": "Friend",
-          "password": "$(FRIEND_PASSWORD)",
+          "password": "",
           "canKickBan": false,
           "canAccessInventories": true,
           "canEditBase": true,
@@ -71,13 +71,13 @@ data:
         },
         {
           "name": "Guest",
-          "password": "$(GUEST_PASSWORD)",
+          "password": "",
           "canKickBan": false,
           "canAccessInventories": false,
           "canEditBase": false,
           "canExtendBase": false,
           "reservedSlots": 0
-        }
+        },
         {
           "name": "Default",
           "password": "",
@@ -86,6 +86,6 @@ data:
           "canEditBase": true,
           "canExtendBase": true,
           "reservedSlots": 0
-    }
+        }
       ]
     }
