@@ -1,0 +1,20 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-data
+  labels:
+    app: {{ .Chart.Name }}
+    release: {{ .Release.Name }}
+  annotations:
+    {{- if .Values.volumes.annotations }}
+    {{- toYaml .Values.volumes.annotations | nindent 4 }}
+    {{- end }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.volumes.data.size | quote }}
+  {{- if .Values.volumes.storageClassName }}
+  storageClassName: {{ .Values.volumes.storageClassName | quote }}
+  {{- end }}
