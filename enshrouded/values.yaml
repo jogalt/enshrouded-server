@@ -1,20 +1,43 @@
 # Namespace name will be propagated to rest of the files
 namespace:
-  name: enshrouded
+  name: steam-servers
   podSecurity:
     enforce: privileged
     audit: privileged
     warn: privileged
 
-config:
-  server:
-    name: "Enshrouded Server"
-    saveDirectory: "./savegame"
-    logDirectory: "./logs"
-    ip: "0.0.0.0"
-    queryPort: 15637
-    slotCount: 16
-    # Add other default configurations here
+#config:
+#  server:
+#    name: "Enshrouded Server"
+#    saveDirectory: "./savegame"
+#    logDirectory: "./logs"
+#    ip: "0.0.0.0"
+#    queryPort: 15637
+#    slotCount: 16
+#    # Add other default configurations here
+
+service:
+  type: cilium # Choose between 'cilium' or 'nginx'
+  ports:
+    - name: "query-port"
+      port: 15637
+      targetPort: 15637
+      protocol: UDP
+    - name: "game-port"
+      port: 15636
+      targetPort: 15636
+      protocol: UDP
+
+cilium:
+  type: LoadBalancer
+  annotations:
+    io.cilium/lb-ipam-ips: "10.26.14.82"
+    ingress.cilium.io/loadbalancer-mode: "dedicated"
+
+nginx:
+  type: ClusterIP
+  annotations: {} # No HTTP-specific annotations since this is UDP traffic
+
 
 # StatefulSet Configuration
 statefulset:
@@ -43,20 +66,3 @@ secrets:
   adminSecret: enshrouded-secrets
   friendSecret: enshrouded-secrets
   guestSecret: enshrouded-secrets
-
-env:
-- name: SECRET_ADMIN_PASSWORD
-  valueFrom:
-    secretKeyRef:
-      name: enshrouded-secrets
-      key: ADMIN_PASSWORD
-- name: SECRET_FRIEND_PASSWORD
-  valueFrom:
-    secretKeyRef:
-      name: enshrouded-secrets
-      key: FRIEND_PASSWORD
-- name: SECRET_GUEST_PASSWORD
-  valueFrom:
-    secretKeyRef:
-      name: enshrouded-secrets
-      key: GUEST_PASSWORD
