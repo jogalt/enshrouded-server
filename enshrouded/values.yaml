@@ -1,32 +1,27 @@
-image:
-  repository: jogaltanon/enshrouded-server
-  tag: proton-latest
-
-service:
-  type: LoadBalancer
-  externalIPs: []
-  annotations: {}
-
-resources:
-  requests:
-    memory: 12G
-    cpu: 4.0
-
-volumes:
-  dataPVC:
-    # -- Size of the persistent volume
-    size: 50Gi
-  storageClassName: ""
+# values.yaml
+namespace:
+  name: enshrouded
+  podSecurity:
+    enforce: privileged
+    audit: privileged
+    warn: privileged
 
 config:
-  # -- Server name
-  serverName: "Enshrouded Server"
-  # -- Server password. If not set, password will be generated randomly.
-  serverPassword: ""
-  # -- Existing secret name for server password. Must contain key named "password". If set `serverPassword` will be ignored.
-  serverPasswordExistingSecretName: ""
-  gamePort: 15636
-  queryPort: 15637
-  # -- Number of server slots
-  serverSlots: 16
-  externalConfig: 0
+  server:
+    name: "Enshrouded Server"
+    saveDirectory: "./savegame"
+    logDirectory: "./logs"
+    ip: "0.0.0.0"
+    queryPort: 15637
+    slotCount: 16
+    # Add other default configurations here
+
+statefulset:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 500m
+      memory: 500Mi
+    limits:
+      cpu: 4
+      memory: 6Gi
