@@ -17,13 +17,6 @@ spec:
   externalIPs: {{ . | toYaml | nindent 4 }}
   {{- end }}
   ports:
-  - name: game-port
-    port: {{ .Values.config.gamePort | int }}
-    targetPort: game-port
-    protocol: UDP
-    {{- if eq .Values.service.type "NodePort" }}
-    nodePort: {{ .Values.config.gamePort | int }}
-    {{- end }}
   - name: query-port
     port: {{ .Values.config.queryPort | int }}
     targetPort: query-port
