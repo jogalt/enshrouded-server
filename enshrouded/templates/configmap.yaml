@@ -6,7 +6,7 @@ metadata:
   namespace: steam-servers
 data:
   enshrouded_server.json: |
-{
+    {
         "name": "Enshrouded Server",
         "saveDirectory": "./savegame",
         "logDirectory": "./logs",
@@ -79,3 +79,4 @@ data:
                         "reservedSlots": 0
                 }
         ]
+    }
