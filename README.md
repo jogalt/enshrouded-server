@@ -12,8 +12,6 @@ Run Enshrouded dedicated server in a container. Optionally includes helm chart f
 
 The processes within the container do **NOT** run as root. Everything runs as the user steam (gid:10000/uid:10000 by default). If you exec into the container, you will drop into `/home/steam` as the steam user. Enshrouded will be installed to `/home/steam/enshrouded`. Any persistent volumes should be mounted to `/home/steam/enshrouded/savegame` and be owned by 10000:10000. 
 
-If you absolutely require to run the process in the container as a gid/uid other than 10000, you can build your own image based on my dockerfile. Instructions are covered [Here](https://github.com/jsknnr/enshrouded-server/issues/51)
-
 ### Proton and Wine based images
 
 The `latest` tag is now based on the Proton build instead of Wine. This should be seamless. Outside of `latest`, there is `wine-$realease_version` and `proton-$release_version` with `$release_version` being the version of the release from GitHub. I am no longer updating the Wine version of this image.
@@ -154,9 +152,6 @@ I've built a Helm chart and have included it in the `helm` directory within this
 ### Connectivity
 
 If you are having issues connecting to the server once the container is deployed, I promise the issue is not with this image. You need to make sure that the ports 15636 and 15637 (or whichever ones you decide to use) are open on your router as well as the container host where this container image is running. You will also have to port-forward the game-port and query-port from your router to the private IP address of the container host where this image is running. After this has been done correctly and you are still experiencing issues, your internet service provider (ISP) may be blocking the ports and you should contact them to troubleshoot.
-
-For additional help, refer to this closed issue where some folks were able to debug their issues. It may be of help. <br>
-https://github.com/jsknnr/enshrouded-server/issues/16
 
 ### Storage
 

@@ -1,4 +1,4 @@
-# values.yaml
+# Namespace name will be propagated to rest of the files
 namespace:
   name: enshrouded
   podSecurity:
@@ -16,8 +16,13 @@ config:
     slotCount: 16
     # Add other default configurations here
 
+# StatefulSet Configuration
 statefulset:
   replicas: 1
+  image:
+    repository: jogaltanon/enshrouded-server
+    tag: proton-latest
+    pullPolicy: Always
   resources:
     requests:
       cpu: 500m
@@ -25,3 +30,13 @@ statefulset:
     limits:
       cpu: 4
       memory: 6Gi
+  securityContext:
+    runAsUser: 10000
+    runAsGroup: 10000
+    fsGroup: 10000
+  volumes:
+    data:
+      # Change Storage class based on your system
+      storageClassName: default
+      size: 5Gi
+
