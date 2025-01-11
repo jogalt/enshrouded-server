@@ -1,6 +1,6 @@
 image:
   repository: jogaltanon/enshrouded-server
-  tag: latest
+  tag: proton-latest
 
 service:
   type: LoadBalancer
