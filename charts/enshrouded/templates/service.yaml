@@ -1,27 +1,34 @@
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: enshrouded
-  namespace: {{ .Values.namespace.name }}
-  annotations:
-    {{- if eq .Values.service.type "cilium" }}
-    {{- range $key, $value := .Values.cilium.annotations }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
-    {{- else if eq .Values.service.type "nginx" }}
-    {{- range $key, $value := .Values.nginx.annotations }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
-    {{- end }}
+  name: "{{ .Chart.Name }}-service"
+  labels:
+    app: "{{ .Chart.Name }}"
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+  {{- with .Values.service.annotations }}
+  annotations: {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  type: {{ if eq .Values.service.type "cilium" }}{{ .Values.cilium.type | default "LoadBalancer" }}{{ else }}{{ .Values.nginx.type | default "ClusterIP" }}{{ end }}
+  type: {{ .Values.service.type }}
+  {{- with .Values.service.externalIPs }}
+  externalIPs: {{ . | toYaml | nindent 4 }}
+  {{- end }}
   ports:
-    {{- range .Values.service.ports }}
-    - port: {{ .port }}
-      protocol: {{ .protocol | default "TCP" }}
-      name: {{ .name }}
-      targetPort: {{ .targetPort }}
+  - name: game-port
+    port: {{ .Values.config.gamePort | int }}
+    targetPort: game-port
+    protocol: UDP
+    {{- if eq .Values.service.type "NodePort" }}
+    nodePort: {{ .Values.config.gamePort | int }}
+    {{- end }}
+  - name: query-port
+    port: {{ .Values.config.queryPort | int }}
+    targetPort: query-port
+    protocol: UDP
+    {{- if eq .Values.service.type "NodePort" }}
+    nodePort: {{ .Values.config.queryPort| int }}
     {{- end }}
   selector:
-    app: enshrouded
+    app: "{{ .Chart.Name }}"
