@@ -58,6 +58,8 @@ spec:
         env:
         - name: SERVER_NAME
           value: {{ .Values.config.serverName | squote }}
+        - name: SERVER_ADMIN_ACCOUNTS
+          value: {{ .Values.config.serverAdminAccounts | squote }}
         - name: SERVER_PASSWORD
           valueFrom:
             secretKeyRef:
