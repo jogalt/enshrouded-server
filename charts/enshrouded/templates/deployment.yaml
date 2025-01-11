@@ -63,16 +63,11 @@ spec:
             secretKeyRef:
               name: enshrouded-secrets
               key: ADMIN_PASSWORD
-        - name: GAME_PORT
-          value: {{ .Values.config.gamePort | squote }}
         - name: QUERY_PORT
           value: {{ .Values.config.queryPort | squote }}
         - name: SERVER_SLOTS
           value: {{ .Values.config.serverSlots | squote }}
         ports:
-        - name: game-port
-          containerPort: {{ .Values.config.gamePort | int }}
-          protocol: UDP
         - name: query-port
           containerPort: {{ .Values.config.queryPort | int }}
           protocol: UDP
