@@ -27,6 +27,20 @@ spec:
         runAsUser: 10000
         runAsGroup: 10000
         fsGroup: 10000
+      initContainers:
+      - name: init-permissions
+        image: busybox:latest
+        command: ["sh", "-c"]
+        args:
+          - |
+            chown -R 10000:10000 /home/steam/enshrouded/savegame;
+            chown -R 10000:10000 /home/steam/enshrouded/enshrouded_server.json;
+        volumeMounts:
+        - name: data
+          mountPath: /home/steam/enshrouded/savegame
+        - name: enshrouded-config
+          mountPath: /home/steam/enshrouded/enshrouded_server.json
+          subPath: enshrouded_server.json
       containers:
       - name: "{{ .Chart.Name }}"
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
