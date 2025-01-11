@@ -1,4 +1,4 @@
-{{- define "enshrouded-secrets.passwordSecretName" -}}
+{{- define "enshrouded.passwordSecretName" -}}
 {{- if .Values.config.serverPasswordExistingSecretName -}}
 {{ .Values.config.serverPasswordExistingSecretName -}}
 {{- else -}}

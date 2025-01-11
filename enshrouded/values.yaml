@@ -1,69 +1,32 @@
-# Namespace name will be propagated to rest of the files
-namespace:
-  name: steam-servers
-  podSecurity:
-    enforce: privileged
-    audit: privileged
-    warn: privileged
-
-config:
-  serverPasswordExistingSecretName: ""
-  server:
-    name: "Enshrouded Server"
-    saveDirectory: "./savegame"
-    logDirectory: "./logs"
-    ip: "0.0.0.0"
-    queryPort: 15637
-    slotCount: 16
-    # Add other default configurations here
+image:
+  repository: sknnr/enshrouded-dedicated-server
+  tag: latest
 
 service:
-  type: nginx # Choose between 'cilium' or 'nginx'
-  ports:
-    - name: "query-port"
-      port: 15637
-      targetPort: 15637
-      protocol: UDP
-    - name: "game-port"
-      port: 15636
-      targetPort: 15636
-      protocol: UDP
-
-cilium:
   type: LoadBalancer
-  annotations:
-    io.cilium/lb-ipam-ips: "10.26.14.82"
-    ingress.cilium.io/loadbalancer-mode: "dedicated"
+  externalIPs: []
+  annotations: {}
 
-nginx:
-  type: ClusterIP
-  annotations: {} # No HTTP-specific annotations since this is UDP traffic
+resources:
+  requests:
+    memory: 12G
+    cpu: 4.0
 
+volumes:
+  dataPVC:
+    # -- Size of the persistent volume
+    size: 50Gi
+  storageClassName: ""
 
-# StatefulSet Configuration
-statefulset:
-  replicas: 1
-  image:
-    repository: jogaltanon/enshrouded-server
-    tag: proton-latest
-    pullPolicy: Always
-  resources:
-    requests:
-      cpu: 500m
-      memory: 500Mi
-    limits:
-      cpu: 4
-      memory: 6Gi
-  securityContext:
-    runAsUser: 10000
-    runAsGroup: 10000
-    fsGroup: 10000
-  volumes:
-    data:
-      # Change Storage class based on your system
-      storageClassName: default
-      size: 5Gi
-secrets:
-  adminSecret: enshrouded-secrets
-  friendSecret: enshrouded-secrets
-  guestSecret: enshrouded-secrets
+config:
+  # -- Server name
+  serverName: "Enshrouded Server"
+  # -- Server password. If not set, password will be generated randomly.
+  serverPassword: ""
+  # -- Existing secret name for server password. Must contain key named "password". If set `serverPassword` will be ignored.
+  serverPasswordExistingSecretName: ""
+  gamePort: 15636
+  queryPort: 15637
+  # -- Number of server slots
+  serverSlots: 16
+  externalConfig: 0
