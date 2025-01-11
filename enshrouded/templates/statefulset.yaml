@@ -25,6 +25,22 @@ spec:
         - name: enshrouded
           image: "{{ .Values.statefulset.image.repository }}:{{ .Values.statefulset.image.tag }}"
           imagePullPolicy: {{ .Values.statefulset.image.pullPolicy }}
+          env:
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.adminSecret }}
+                  key: ADMIN_PASSWORD
+            - name: FRIEND_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.friendSecret }}
+                  key: FRIEND_PASSWORD
+            - name: GUEST_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.guestSecret }}
+                  key: GUEST_PASSWORD
           ports:
             - containerPort: 15637
               name: "query-port-udp"

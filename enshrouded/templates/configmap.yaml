@@ -52,7 +52,7 @@ data:
       "userGroups": [
         {
           "name": "Admin",
-          "password": "{{SECRET_ADMIN_PASSWORD}}",
+          "password": "$(ADMIN_PASSWORD)",
           "canKickBan": true,
           "canAccessInventories": true,
           "canEditBase": true,
@@ -61,7 +61,7 @@ data:
         },
         {
           "name": "Friend",
-          "password": "{{SECRET_FRIEND_PASSWORD}}",
+          "password": "$(FRIEND_PASSWORD)",
           "canKickBan": false,
           "canAccessInventories": true,
           "canEditBase": true,
@@ -70,7 +70,7 @@ data:
         },
         {
           "name": "Guest",
-          "password": "{{SECRET_GUEST_PASSWORD}}",
+          "password": "$(GUEST_PASSWORD)",
           "canKickBan": false,
           "canAccessInventories": false,
           "canEditBase": false,

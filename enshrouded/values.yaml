@@ -39,4 +39,24 @@ statefulset:
       # Change Storage class based on your system
       storageClassName: default
       size: 5Gi
+secrets:
+  adminSecret: enshrouded-secrets
+  friendSecret: enshrouded-secrets
+  guestSecret: enshrouded-secrets
 
+env:
+- name: SECRET_ADMIN_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: enshrouded-secrets
+      key: ADMIN_PASSWORD
+- name: SECRET_FRIEND_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: enshrouded-secrets
+      key: FRIEND_PASSWORD
+- name: SECRET_GUEST_PASSWORD
+  valueFrom:
+    secretKeyRef:
+      name: enshrouded-secrets
+      key: GUEST_PASSWORD

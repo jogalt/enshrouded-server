@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   enshrouded-server:
   - apiVersion: v1
-    created: "2025-01-11T01:09:29.333134295Z"
+    created: "2025-01-11T01:41:30.451662909Z"
     description: Enshrouded dedicated server.
-    digest: 3768edea4069b0d3e90e8d3b912f3c6d547b50a8a483e5e56ef4c03cc34953a0
+    digest: 6f70e527c846880cd832ff157294199420dc2f22d24e43c3e876dbf2ee1a7f56
     home: https://enshrouded.com/
     keywords:
     - game
@@ -14,4 +14,4 @@ entries:
     urls:
     - https://jogalt.github.io/enshrouded-server/enshrouded-server-1.0.0.tgz
     version: 1.0.0
-generated: "2025-01-11T01:09:29.332681655Z"
+generated: "2025-01-11T01:41:30.451148555Z"
