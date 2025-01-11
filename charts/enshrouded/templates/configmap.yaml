@@ -6,8 +6,6 @@ metadata:
   namespace: steam-servers
 data:
   enshrouded_server.json: |
-    DEFAULT enshrouded_server.json / VERSION 0.7.4.0
-
 {
         "name": "Enshrouded Server",
         "saveDirectory": "./savegame",
