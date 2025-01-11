@@ -12,7 +12,11 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.volumes.dataPVC.size }}
-  {{- if ne .Values.volumes.storageClassName "" }}
-  storageClassName: {{ .Values.volumes.storageClassName }}
+      storage: {{ .Values.volumes.data.size | quote }}
+  {{- if .Values.volumes.storageClassName }}
+  storageClassName: {{ .Values.volumes.storageClassName | quote }}
+  {{- end }}
+  {{- if .Values.volumes.annotations }}
+  annotations:
+    {{- toYaml .Values.volumes.annotations | nindent 4 }}
   {{- end }}
