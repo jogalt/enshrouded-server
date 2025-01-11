@@ -6,15 +6,15 @@ namespace:
     audit: privileged
     warn: privileged
 
-#config:
-#  server:
-#    name: "Enshrouded Server"
-#    saveDirectory: "./savegame"
-#    logDirectory: "./logs"
-#    ip: "0.0.0.0"
-#    queryPort: 15637
-#    slotCount: 16
-#    # Add other default configurations here
+config:
+  server:
+    name: "Enshrouded Server"
+    saveDirectory: "./savegame"
+    logDirectory: "./logs"
+    ip: "0.0.0.0"
+    queryPort: 15637
+    slotCount: 16
+    # Add other default configurations here
 
 service:
   type: cilium # Choose between 'cilium' or 'nginx'
