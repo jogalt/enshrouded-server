@@ -13,7 +13,7 @@ data:
         "logDirectory": "./logs",
         "ip": "0.0.0.0",
         "queryPort": 15637,
-        "gamePort": 15636
+        "gamePort": 15636,
         "slotCount": 16,
         "gameSettingsPreset": "Default",
         "gameSettings": {
