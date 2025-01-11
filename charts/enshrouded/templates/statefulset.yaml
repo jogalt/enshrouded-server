@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: enshrouded
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Values.namespace.name }}
   labels:
     app: enshrouded
 spec:
@@ -45,6 +45,9 @@ spec:
             - containerPort: 15637
               name: "query-port-udp"
               protocol: UDP
+            - containerPort: 15636
+              name: "game-port-udp"
+              protocol: UDP
           volumeMounts:
             - name: enshrouded-data
               mountPath: /home/steam/enshrouded/savegame
@@ -62,14 +65,17 @@ spec:
         - name: config-volume
           configMap:
             name: enshrouded-config
-        - name: enshrouded-data
-          persistentVolumeClaim:
-            claimName: enshrouded-data
   volumeClaimTemplates:
-  - metadata:
-      name: enshrouded-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: {{ .Values.statefulset.volumes.data.size }}
+    - metadata:
+        name: enshrouded-data
+        labels:
+          app: enshrouded
+          release: {{ .Release.Name }}
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.statefulset.volumes.data.size }}
+        {{- if .Values.statefulset.volumes.data.storageClassName }}
+        storageClassName: {{ .Values.statefulset.volumes.data.storageClassName | quote }}
+        {{- end }}
