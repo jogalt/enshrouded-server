@@ -56,6 +56,16 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
         env:
+        - name: STEAM_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: enshrouded-secrets
+              key: steam.username
+        - name: STEAM_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: enshrouded-secrets
+              key: steam.password
         - name: SERVER_NAME
           value: {{ .Values.config.serverName | squote }}
         - name: SERVER_ADMIN_ACCOUNTS
