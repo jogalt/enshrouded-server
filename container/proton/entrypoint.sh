@@ -52,7 +52,7 @@ if [ -z "$STEAM_USERNAME" ] || [ -z "$STEAM_PASSWORD" ]; then
     echo "$(timestamp) WARN: STEAM_USERNAME or STEAM_PASSWORD not set. Using anonymous login."
     LOGIN_COMMAND="+login anonymous"
 else
-    LOGIN_COMMAND="+login \"$STEAM_USERNAME\" \"$STEAM_PASSWORD\""
+    LOGIN_COMMAND="+login $STEAM_USERNAME $STEAM_PASSWORD"
 fi
 
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
