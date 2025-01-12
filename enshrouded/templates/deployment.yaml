@@ -94,8 +94,6 @@ spec:
         - name: enshrouded-config
           mountPath: /home/steam/enshrouded/enshrouded_server.json
           subPath: enshrouded_server.json
-        - name: config-volume
-          mountPath: /tmp
         securityContext:
           allowPrivilegeEscalation: false
       volumes:
@@ -105,5 +103,3 @@ spec:
       - name: enshrouded-config
         configMap:
           name: enshrouded-config
-      - name: config-volume
-        emptyDir: {}
