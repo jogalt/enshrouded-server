@@ -37,7 +37,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         jq \
         locales \
         lib32gcc-s1 \
-        tcpdump \
+        tcpdump
 RUN groupadd -g ${CONTAINER_GID} steam
 RUN useradd -m -u ${CONTAINER_UID} -g ${CONTAINER_GID} steam
 RUN echo 'LANG="en_US.UTF-8"' > /etc/default/locale
