@@ -15,15 +15,14 @@ resources:
 volumes:
   dataPVC:
     # -- Size of the persistent volume
-    size: 5Gi
+    size: 50Gi
   storageClassName: "longhorn"
 
 config:
   # -- Server name
-  serverName: "Enshrouded Server"
+  serverName: "Private Enshrouded Server"
   # -- Server password. If not set, password will be generated randomly.
-  serverPassword: ""
-  serverAdminAccounts: 
+  #serverPassword: ""
   # -- Existing secret name for server password. Must contain key named "password". If set `serverPassword` will be ignored.
   serverPasswordExistingSecretName: ""
   gamePort: 15636

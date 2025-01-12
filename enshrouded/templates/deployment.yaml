@@ -34,7 +34,6 @@ spec:
         args:
           - |
             find /home/steam/enshrouded/savegame -path /home/steam/enshrouded/savegame/lost+found -prune -o -exec chown -R 10000:10000 {} +;
-            #chown -R 10000:10000 /home/steam/enshrouded/enshrouded_server.json;
         securityContext:
           runAsUser: 0
           runAsGroup: 0
@@ -68,13 +67,11 @@ spec:
               key: steam.password
         - name: SERVER_NAME
           value: {{ .Values.config.serverName | squote }}
-        - name: SERVER_ADMIN_ACCOUNTS
-          value: {{ .Values.config.serverAdminAccounts | squote }}
         - name: SERVER_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ include "enshrouded.passwordSecretName" . }}
-              key: serverPassword
+              name: enshrouded-secrets
+              key: server.password
         - name: STEAM_GSLT
           valueFrom:
             secretKeyRef:
@@ -85,6 +82,21 @@ spec:
             secretKeyRef:
               name: enshrouded-secrets
               key: steam.id
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: enshrouded-secrets
+              key: admin.password
+        - name: FRIEND_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: enshrouded-secrets
+              key: friend.password
+        - name: GUEST_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: enshrouded-secrets
+              key: guest.password
         - name: GAME_PORT
           value: {{ .Values.config.gamePort | squote }}
         - name: QUERY_PORT
