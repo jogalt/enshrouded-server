@@ -23,7 +23,7 @@ config:
   serverName: "Enshrouded Server"
   # -- Server password. If not set, password will be generated randomly.
   serverPassword: ""
-  serverAdminAccounts: 76561199143965588
+  serverAdminAccounts: 
   # -- Existing secret name for server password. Must contain key named "password". If set `serverPassword` will be ignored.
   serverPasswordExistingSecretName: ""
   gamePort: 15636

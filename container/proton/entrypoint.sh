@@ -59,6 +59,8 @@ if [ -z "STEAM_GSLT" ]; then
     GSLT_TOKEN=""
 else
     GSLT_TOKEN="$STEAM_GSLT"
+fi
+
 Find
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
 # Debug output for testing
