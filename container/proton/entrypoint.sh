@@ -48,20 +48,24 @@ fi
 #echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
 #${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" +login anonymous +app_update ${STEAM_APP_ID} validate +quit
 
-# Replace anonymous with secrets
 if [ -z "$STEAM_USERNAME" ] || [ -z "$STEAM_PASSWORD" ]; then
-    echo "$(timestamp) ERROR: STEAM_USERNAME or STEAM_PASSWORD not set. Exiting."
-    exit 1
+    echo "$(timestamp) WARN: STEAM_USERNAME or STEAM_PASSWORD not set. Using anonymous login."
+    LOGIN_COMMAND="+login anonymous"
+else
+    LOGIN_COMMAND="+login \"$STEAM_USERNAME\" \"$STEAM_PASSWORD\""
 fi
 
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
-#Debug output for testing
-echo "${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" \
-  +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
+# Debug output for testing
+echo "${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \"$ENSHROUDED_PATH\" \
+  $LOGIN_COMMAND \
   +app_update ${STEAM_APP_ID} validate +quit"
+
+# Execute the steamcmd command
 ${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" \
-  +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
+  $LOGIN_COMMAND \
   +app_update ${STEAM_APP_ID} validate +quit
+
 
 # Check that steamcmd was successful
 if [ $? != 0 ]; then
