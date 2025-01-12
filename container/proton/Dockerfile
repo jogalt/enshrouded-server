@@ -80,8 +80,8 @@ RUN chmod +x /home/steam/entrypoint.sh
 
 USER steam
 
-EXPOSE 15636/udp
-EXPOSE 15637/udp
+#EXPOSE 15636/udp
+#EXPOSE 15637/udp
 
 # Default command
 CMD ["/home/steam/entrypoint.sh"]

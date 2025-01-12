@@ -55,7 +55,7 @@ data:
         "userGroups": [
                 {
                         "name": "Admin",
-                        "password": "AdminXXXXXXXX",
+                        "password": "$(ADMIN_PASSWORD)",
                         "canKickBan": true,
                         "canAccessInventories": true,
                         "canEditBase": true,
@@ -64,7 +64,7 @@ data:
                 },
                 {
                         "name": "Friend",
-                        "password": "FriendXXXXXXXX",
+                        "password": "$(FRIEND_PASSWORD)",
                         "canKickBan": false,
                         "canAccessInventories": true,
                         "canEditBase": true,
@@ -73,7 +73,7 @@ data:
                 },
                 {
                         "name": "Guest",
-                        "password": "",
+                        "password": "$GUEST_PASSWORD",
                         "canKickBan": false,
                         "canAccessInventories": false,
                         "canEditBase": false,
