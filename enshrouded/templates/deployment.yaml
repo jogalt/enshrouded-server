@@ -80,6 +80,11 @@ spec:
             secretKeyRef:
               name: enshrouded-secrets
               key: steam.gslt
+        - name: STEAM_ID
+          valueFrom:
+            secretKeyRef:
+              name: enshrouded-secrets
+              key: steam.id
         - name: GAME_PORT
           value: {{ .Values.config.gamePort | squote }}
         - name: QUERY_PORT
