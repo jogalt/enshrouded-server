@@ -46,7 +46,7 @@ fi
 
 ## Install/Update Enshrouded
 #echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
-#${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" +login anonymous +app_update ${STEAM_APP_ID} validate +quit
+#/home/steam/steamcmd/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" +login anonymous +app_update ${STEAM_APP_ID} validate +quit
 
 if [ -z "$STEAM_USERNAME" ] || [ -z "$STEAM_PASSWORD" ]; then
     echo "$(timestamp) WARN: STEAM_USERNAME or STEAM_PASSWORD not set. Using anonymous login."
@@ -64,11 +64,11 @@ fi
 Find
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
 # Debug output for testing
-echo "${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \"$ENSHROUDED_PATH\" \
+echo "/home/steam/steamcmd/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \"$ENSHROUDED_PATH\" \
   $LOGIN_COMMAND $GSLT_TOKEN +app_update ${STEAM_APP_ID} validate +quit"
 
 # Execute the steamcmd command
-${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" \
+/home/steam/steamcmd/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" \
   $LOGIN_COMMAND $GSLT_TOKEN +app_update ${STEAM_APP_ID} validate +quit
 
 
@@ -132,9 +132,9 @@ ln -sf /proc/1/fd/1 "${ENSHROUDED_PATH}/logs/enshrouded_server.log"
 
 # Launch Enshrouded
 echo "$(timestamp) INFO: Starting Enshrouded Dedicated Server"
-ls -al /home/steam/enshrouded/
-echo "DEBUG: ${STEAMCMD_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${ENSHROUDED_PATH}/enshrouded_server.exe &"
-${STEAMCMD_PATH}/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${ENSHROUDED_PATH}/enshrouded_server.exe &
+
+echo "DEBUG: /home/steam/steamcmd/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run ${ENSHROUDED_PATH}/enshrouded_server.exe &"
+/home/steam/steamcmd/compatibilitytools.d/GE-Proton${GE_PROTON_VERSION}/proton run /home/steam/enshrouded/enshrouded_server.exe &
 
 # Find pid for enshrouded_server.exe
 timeout=0

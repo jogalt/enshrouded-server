@@ -21,7 +21,7 @@ ENV STEAMCMD_PATH="/home/steam/steamcmd"
 ENV STEAM_SDK64_PATH="/home/steam/.steam/sdk64"
 ENV STEAM_SDK32_PATH="/home/steam/.steam/sdk32"
 ENV STEAM_COMPAT_CLIENT_INSTALL_PATH "$STEAMCMD_PATH"
-ENV STEAM_COMPAT_DATA_PATH "${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID}"
+ENV STEAM_COMPAT_DATA_PATH "/home/steam/steamcmd/steamapps/compatdata/${STEAM_APP_ID}"
 ENV UMU_ID 0
 
 # Install required dependencies and create the steam user
@@ -54,17 +54,17 @@ USER steam
 
 # Download and configure SteamCMD and Proton
 RUN mkdir -p ${ENSHROUDED_PATH}/savegame 
-RUN mkdir -p ${STEAMCMD_PATH}/compatibilitytools.d 
-RUN mkdir -p ${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID} 
-RUN curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf - -C ${STEAMCMD_PATH} 
-RUN chmod +x ${STEAMCMD_PATH}/steamcmd.sh 
-RUN ${STEAMCMD_PATH}/steamcmd.sh +quit 
+RUN mkdir -p /home/steam/steamcmd/compatibilitytools.d 
+RUN mkdir -p /home/steam/steamcmd/steamapps/compatdata/${STEAM_APP_ID} 
+RUN curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf - -C /home/steam/steamcmd 
+RUN chmod +x /home/steam/steamcmd/steamcmd.sh 
+RUN /home/steam/steamcmd/steamcmd.sh +quit 
 RUN mkdir -p /home/steam/.steam 
-RUN ln -s ${STEAMCMD_PATH}/linux64 ${STEAM_SDK64_PATH} 
+RUN ln -s /home/steam/steamcmd/linux64 ${STEAM_SDK64_PATH} 
 RUN ln -s ${STEAM_SDK64_PATH}/steamclient.so ${STEAM_SDK64_PATH}/steamservice.so 
-RUN ln -s ${STEAMCMD_PATH}/linux32 ${STEAM_SDK32_PATH} 
+RUN ln -s /home/steam/steamcmd/linux32 ${STEAM_SDK32_PATH} 
 RUN ln -s ${STEAM_SDK32_PATH}/steamclient.so ${STEAM_SDK32_PATH}/steamservice.so 
-RUN curl -sqL ${GE_PROTON_URL} | tar zxvf - -C ${STEAMCMD_PATH}/compatibilitytools.d/
+RUN curl -sqL ${GE_PROTON_URL} | tar zxvf - -C /home/steam/steamcmd/compatibilitytools.d/
 
 # Copy necessary files
 COPY container/proton/entrypoint.sh /home/steam/entrypoint.sh
@@ -80,7 +80,8 @@ RUN chmod +x /home/steam/entrypoint.sh
 
 USER steam
 
-#RUN /home/steam/entrypoint.sh
+EXPOSE 15636/udp
+EXPOSE 15637/udp
 
 # Default command
 CMD ["/home/steam/entrypoint.sh"]
