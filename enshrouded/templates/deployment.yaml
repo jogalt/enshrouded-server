@@ -75,6 +75,11 @@ spec:
             secretKeyRef:
               name: {{ include "enshrouded.passwordSecretName" . }}
               key: serverPassword
+        - name: GSLT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: enshrouded-secrets
+              key: steam.gslt
         - name: GAME_PORT
           value: {{ .Values.config.gamePort | squote }}
         - name: QUERY_PORT
