@@ -8,7 +8,7 @@ data:
   enshrouded_server.json: |
     {
         "name": "Enshrouded Server",
-        "password": "${SERVER_PASSWORD}",
+        "password": "${{ SERVER_PASSWORD }}",
         "saveDirectory": "./savegame",
         "logDirectory": "./logs",
         "ip": "0.0.0.0",
@@ -55,7 +55,7 @@ data:
         "userGroups": [
                 {
                         "name": "Admin",
-                        "password": "${ADMIN_PASSWORD}",
+                        "password": "${{ ADMIN_PASSWORD  }}",
                         "canKickBan": true,
                         "canAccessInventories": true,
                         "canEditBase": true,
@@ -64,7 +64,7 @@ data:
                 },
                 {
                         "name": "Friend",
-                        "password": "${FRIEND_PASSWORD}",
+                        "password": "${{ FRIEND_PASSWORD }}",
                         "canKickBan": false,
                         "canAccessInventories": true,
                         "canEditBase": true,
@@ -73,7 +73,7 @@ data:
                 },
                 {
                         "name": "Guest",
-                        "password": "${GUEST_PASSWORD}",
+                        "password": "${{ GUEST_PASSWORD }}",
                         "canKickBan": false,
                         "canAccessInventories": false,
                         "canEditBase": false,
