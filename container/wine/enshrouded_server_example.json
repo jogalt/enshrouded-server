@@ -45,13 +45,31 @@
   },
   "userGroups": [
     {
-      "name": "Default",
-      "password": "",
-      "canKickBan": false,
+      "name": "Admin",
+      "password": "AdminXXXXXXXX",
+      "canKickBan": true,
       "canAccessInventories": true,
       "canEditBase": true,
       "canExtendBase": true,
       "reservedSlots": 0
-    }
+},
+{
+      "name": "Friend",
+      "password": "FriendXXXXXXXX",
+      "canKickBan": false,
+      "canAccessInventories": true,
+      "canEditBase": true,
+      "canExtendBase": false,
+      "reservedSlots": 0
+},
+{
+      "name": "Guest",
+      "password": "",
+      "canKickBan": false,
+      "canAccessInventories": false,
+      "canEditBase": false,
+      "canExtendBase": false,
+      "reservedSlots": 0
+}
   ]
 }

@@ -63,7 +63,7 @@
                 },
                 {
                         "name": "Guest",
-                        "password": "GuestXXXXXXXX",
+                        "password": "",
                         "canKickBan": false,
                         "canAccessInventories": false,
                         "canEditBase": false,

@@ -16,7 +16,7 @@ trap 'shutdown' TERM
 
 # Validate arguments
 if [ -z "$SERVER_NAME" ]; then
-    SERVER_NAME='Enshrouded Containerized'
+    SERVER_NAME='Enshrouded Private'
     echo "$(timestamp) WARN: SERVER_NAME not set, using default: Enshrouded Containerized"
 fi
 
