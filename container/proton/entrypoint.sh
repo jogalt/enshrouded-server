@@ -55,6 +55,10 @@ if [ -z "$STEAM_USERNAME" ] || [ -z "$STEAM_PASSWORD" ]; then
 fi
 
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
+#Debug output for testing
+echo "${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" \
+  +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
+  +app_update ${STEAM_APP_ID} validate +quit"
 ${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" \
   +login "$STEAM_USERNAME" "$STEAM_PASSWORD" \
   +app_update ${STEAM_APP_ID} validate +quit
