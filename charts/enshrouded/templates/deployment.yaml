@@ -75,7 +75,7 @@ spec:
             secretKeyRef:
               name: {{ include "enshrouded.passwordSecretName" . }}
               key: serverPassword
-        - name: GSLT_TOKEN
+        - name: STEAM_GSLT
           valueFrom:
             secretKeyRef:
               name: enshrouded-secrets
