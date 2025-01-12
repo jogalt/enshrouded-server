@@ -9,9 +9,9 @@ ARG GE_PROTON_VERSION=9-22
 # Set environment variables
 ENV DEBIAN_FRONTEND "noninteractive"
 #AppID for Enshrouded Desktop App
-#ENV STEAM_APP_ID "2278520"
+ENV STEAM_APP_ID "2278520"
 #AppID for Enshroud Server
-ENV STEAM_APP_ID "1203620"
+#ENV STEAM_APP_ID "1203620"
 ENV HOME "/home/steam"
 ENV ENSHROUDED_PATH "/home/steam/enshrouded"
 ENV ENSHROUDED_CONFIG "${ENSHROUDED_PATH}/enshrouded_server.json"
@@ -38,16 +38,16 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
         locales \
         lib32gcc-s1 \
         tcpdump \
-    && groupadd -g ${CONTAINER_GID} steam \
-    && useradd -m -u ${CONTAINER_UID} -g ${CONTAINER_GID} steam \
-    && echo 'LANG="en_US.UTF-8"' > /etc/default/locale \
-    && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
-    && locale-gen \
-    && rm -f /etc/machine-id \
-    && dbus-uuidgen --ensure=/etc/machine-id \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean \
-    && apt-get autoremove -y 
+RUN groupadd -g ${CONTAINER_GID} steam
+RUN useradd -m -u ${CONTAINER_UID} -g ${CONTAINER_GID} steam
+RUN echo 'LANG="en_US.UTF-8"' > /etc/default/locale
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+RUN locale-gen
+RUN rm -f /etc/machine-id
+RUN dbus-uuidgen --ensure=/etc/machine-id
+RUN rm -rf /var/lib/apt/lists/*
+RUN apt-get clean
+RUN apt-get autoremove -y 
 
 # Switch to the steam user
 USER steam

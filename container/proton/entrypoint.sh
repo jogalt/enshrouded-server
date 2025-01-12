@@ -58,7 +58,7 @@ fi
 if [ -z "STEAM_GSLT" ]; then
     GSLT_TOKEN=""
 else
-    GSLT_TOKEN="-GSLTToken=$STEAM_GSLT"
+    GSLT_TOKEN="+sv_setsteamaccount $STEAM_GSLT"
 fi
 
 Find
