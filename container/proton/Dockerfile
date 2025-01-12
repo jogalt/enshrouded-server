@@ -8,8 +8,10 @@ ARG GE_PROTON_VERSION=9-22
 
 # Set environment variables
 ENV DEBIAN_FRONTEND "noninteractive"
+#AppID for Enshrouded Desktop App
 #ENV STEAM_APP_ID "2278520"
-ENV STEAM_APP_ID "1203620" #AppID for enshrouded server, requires credentials to download updates
+#AppID for Enshroud Server
+ENV STEAM_APP_ID "1203620"
 ENV HOME "/home/steam"
 ENV ENSHROUDED_PATH "/home/steam/enshrouded"
 ENV ENSHROUDED_CONFIG "${ENSHROUDED_PATH}/enshrouded_server.json"
