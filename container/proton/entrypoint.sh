@@ -112,7 +112,7 @@ rm "${ENSHROUDED_PATH}/savegame/test"
 #    jq --arg i "$SERVER_IP" '.ip = $i' ${ENSHROUDED_CONFIG} > "$tmpfile" && mv "$tmpfile" $ENSHROUDED_CONFIG
 #else
     echo "$(timestamp) INFO: EXTERNAL_CONFIG set to true, not updating Enshrouded Server configuration"
-fi
+#fi
 
 # Wine talks too much and it's annoying
 export WINEDEBUG=-all
