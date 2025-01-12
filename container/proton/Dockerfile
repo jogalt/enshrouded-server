@@ -51,17 +51,17 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 USER steam
 
 # Download and configure SteamCMD and Proton
-RUN mkdir -p ${ENSHROUDED_PATH}/savegame \
-RUN mkdir -p ${STEAMCMD_PATH}/compatibilitytools.d \
-RUN mkdir -p ${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID} \
-RUN curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf - -C ${STEAMCMD_PATH} \
-RUN chmod +x ${STEAMCMD_PATH}/steamcmd.sh \
-RUN ${STEAMCMD_PATH}/steamcmd.sh +quit \
-RUN mkdir -p /home/steam/.steam \
-RUN ln -s ${STEAMCMD_PATH}/linux64 ${STEAM_SDK64_PATH} \
-RUN ln -s ${STEAM_SDK64_PATH}/steamclient.so ${STEAM_SDK64_PATH}/steamservice.so \
-RUN ln -s ${STEAMCMD_PATH}/linux32 ${STEAM_SDK32_PATH} \
-RUN ln -s ${STEAM_SDK32_PATH}/steamclient.so ${STEAM_SDK32_PATH}/steamservice.so \
+RUN mkdir -p ${ENSHROUDED_PATH}/savegame 
+RUN mkdir -p ${STEAMCMD_PATH}/compatibilitytools.d 
+RUN mkdir -p ${STEAMCMD_PATH}/steamapps/compatdata/${STEAM_APP_ID} 
+RUN curl -sqL https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar zxvf - -C ${STEAMCMD_PATH} 
+RUN chmod +x ${STEAMCMD_PATH}/steamcmd.sh 
+RUN ${STEAMCMD_PATH}/steamcmd.sh +quit 
+RUN mkdir -p /home/steam/.steam 
+RUN ln -s ${STEAMCMD_PATH}/linux64 ${STEAM_SDK64_PATH} 
+RUN ln -s ${STEAM_SDK64_PATH}/steamclient.so ${STEAM_SDK64_PATH}/steamservice.so 
+RUN ln -s ${STEAMCMD_PATH}/linux32 ${STEAM_SDK32_PATH} 
+RUN ln -s ${STEAM_SDK32_PATH}/steamclient.so ${STEAM_SDK32_PATH}/steamservice.so 
 RUN curl -sqL ${GE_PROTON_URL} | tar zxvf - -C ${STEAMCMD_PATH}/compatibilitytools.d/
 
 # Copy necessary files
@@ -75,7 +75,6 @@ USER root
 
 # Ensure entrypoint script is executable
 RUN chmod +x /home/steam/entrypoint.sh
-#RUN ln -s /home/steam/enshrouded_server.json /enshrouded_server.json
 
 USER steam
 
