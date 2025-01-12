@@ -55,10 +55,15 @@ else
     LOGIN_COMMAND="+login $STEAM_USERNAME $STEAM_PASSWORD"
 fi
 
+if [ -z "STEAM_GSLT" ]; then
+    GSLT_TOKEN=""
+else
+    GSLT_TOKEN="$GSLT_TOKEN"
+Find
 echo "$(timestamp) INFO: Updating Enshrouded Dedicated Server"
 # Debug output for testing
 echo "${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir \"$ENSHROUDED_PATH\" \
-  $LOGIN_COMMAND +app_update ${STEAM_APP_ID} validate +quit"
+  $LOGIN_COMMAND +app_update ${STEAM_APP_ID} validate $GSLT_TOKEN +quit"
 
 # Execute the steamcmd command
 ${STEAMCMD_PATH}/steamcmd.sh +@sSteamCmdForcePlatformType windows +force_install_dir "$ENSHROUDED_PATH" \
